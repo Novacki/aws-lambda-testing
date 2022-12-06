@@ -21,14 +21,19 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    #- run: npm ci
+        
     - name: Install dependencies
       run: npm install
+      working-directory: ./src/
+      
+    - name: Execute CI
+      run: npm ci
       working-directory: ./src/
       
     - name: Build
       run: npm run build --if-present
       working-directory: ./src/
-
-    - run: npm test
+      
+    - name: Run tests
+      run: npm test
       working-directory: ./src/
